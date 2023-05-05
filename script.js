@@ -40,17 +40,16 @@ let num2 = document.querySelector('.num2')
 
 
 function operate (num1, operator, num2) {
-  let operator = ['+', '-', 'x', '/']
-  if (operator[0]) {
+  if (operator === '+') {
     return add(num1, num2)
   }
-  if (operator[1]) {
+  if (operator === '-') {
     return subtract(num1, num2)
   }
-  if (operator[2]) {
+  if (operator === '*') {
     return multiply(num1, num2)
   }
-  if (operator[3]) {
+  if (operator === '/') {
     return divide(num1, num2)
   }
 }
