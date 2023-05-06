@@ -34,9 +34,9 @@ function divide (...args) {
   return roundToTwo(total) 
 }
 
-let num1 = document.querySelector('.num1')
-let operator = document.querySelector('.operator')
-let num2 = document.querySelector('.num2')
+let num1 = null;
+let operator = null;
+let num2 = null;
 
 
 function operate (num1, operator, num2) {
@@ -54,11 +54,37 @@ function operate (num1, operator, num2) {
   }
 }
 
+const display = document.querySelector('.display');
+const numbers = document.querySelectorAll('.number');
+const operators = document.querySelectorAll('.operator');
+const clear = document.querySelector('.clear');
+const del = document.querySelector('.delete');
+const equal = document.querySelector('.equal')
+
+function populateDisplay (event) {
+  const button = event.target;
+  const value = button.textContent;
+  if ( value.length < 7) {
+    display.textContent += value;
+  }
+}
+
+function operatorDisplay(event) {
+  const button = event.target;
+  const value = button.textContent;
+  if ( value.length <1) {
+    display.textContent += value;
+  }
+
+}
 
 
+operators.forEach(operator => {
+  operator.addEventListener('click', operatorDisplay)
+   });
 
+numbers.forEach(number => {
+  number.addEventListener('click', populateDisplay); 
+})
 
-console.log(add(5.93284824,8,2,3,6));
-console.log(subtract(5,8,2,3,6));
-console.log(divide(5,10));
-console.log(multiply(5,8));
+// You’ll need to store the first number that is input into the calculator when a user presses an operator

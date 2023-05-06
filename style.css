@@ -4,6 +4,7 @@
   box-sizing: border-box;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
+  
 }
 :root {
   --bg-color: lightgray;
@@ -55,6 +56,16 @@ hr {
   height:9em;
   width: 450px;
   border-radius: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  
+}
+
+
+.display {
+ font-size: 2em;
+ margin-right: 15px;
 }
 
 .big-button-container {
@@ -108,4 +119,10 @@ hr {
   height: 1.8em;
   border-radius: 10px;
   font-size: 2em;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
