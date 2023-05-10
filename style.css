@@ -97,8 +97,15 @@ hr {
   background-color: rgb(236, 39, 72) ;
 }
 
+.clear:hover {
+  box-shadow: 0px 0px 20px rgb(236, 39, 72);
+}
+
 .delete {
   background-color: rgb(114, 211, 243);
+}
+.delete:hover {
+  box-shadow: 0px 0px 20px rgb(114, 211, 243);
 }
 
 .button-container {
@@ -110,6 +117,11 @@ hr {
   flex-direction: column;
   justify-content: space-between;
 
+}
+
+.button-container button:hover {
+  background-color:aqua;
+  box-shadow: 0px 0px 15px #0ef;
 }
 
 .rows {
