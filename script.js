@@ -12,7 +12,7 @@ function add (...args) {
 
 function subtract (...args) {
   let total = args[0]
-  for (let i = 0; i < args.length; i++) {
+  for (let i = 1; i < args.length; i++) {
     total -= args[i];
   }
   return roundToTwo(total)
@@ -41,26 +41,27 @@ let currentValue = '';
 
 function operate (currentValue, operator, previousValue) {
   if (operator === '+') {
-    return add(currentValue, previousValue)
+    return add(previousValue, currentValue)
   }
   if (operator === '-') {
-    return subtract(currentValue, previousValue)
+    return subtract(previousValue, currentValue)
   }
-  if (operator === '*') {
-    return multiply(currentValue, previousValue)
+  if (operator === 'x') {
+    return multiply(previousValue, currentValue)
   }
-  if (operator === '/') {
-    return divide(currentValue, previousValue)
+  if (operator === '÷') {
+    return divide(previousValue, currentValue)
   }
 }
 
-const currentDisplay = document.querySelector('.currentDisplay');
-const previousDisplay = document.querySelector('.previousDisplay')
+let currentDisplay = document.querySelector('.currentDisplay');
+let previousDisplay = document.querySelector('.previousDisplay')
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
 const clear = document.querySelector('.clear');
 const del = document.querySelector('.delete');
-const equal = document.querySelector('.equal')
+const equal = document.querySelector('.equal');
+const decimal = document.querySelector('.decimal')
 
 numbers.forEach(number => {
   number.addEventListener('click', function (e) {
@@ -79,8 +80,7 @@ operators.forEach(oper => {
   oper.addEventListener('click', function (e) {
     handleOperator(e.target.textContent);
     currentDisplay.textContent = currentValue;
-    previousDisplay.textContent = previousValue + ' ' + operator;
-    
+    previousDisplay.textContent = previousValue + ' ' + operator; 
   })
    });
 
@@ -89,4 +89,40 @@ function handleOperator(op) {
   previousValue = currentValue;
   currentValue = ''
 
+}
+
+clear.addEventListener('click', cleared)
+
+function cleared() {
+  currentValue = '';
+  previousValue = '';
+  operator = '';
+  currentDisplay.textContent = ''; 
+  previousDisplay.textContent = '';
+}
+
+equal.addEventListener('click', equalled)
+
+function equalled () {
+  previousDisplay.textContent += ' ' + currentValue;
+  currentValue = operate(parseFloat(currentValue), operator, parseFloat(previousValue));
+  currentDisplay.textContent = currentValue;
+}
+
+function deleted () {
+    if (currentValue.length > 1) {
+      currentValue = currentValue.toString()
+    currentValue = currentValue.slice(0,-1);
+    currentDisplay.textContent = currentValue;
+    }
+}
+
+del.addEventListener('click', deleted)
+
+
+decimal.addEventListener('click', decimalised)
+
+function decimalised () {
+ currentValue += '.'
+ currentDisplay.textContent = currentValue
 }
