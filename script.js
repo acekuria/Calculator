@@ -123,6 +123,11 @@ del.addEventListener('click', deleted)
 decimal.addEventListener('click', decimalised)
 
 function decimalised () {
- currentValue += '.'
+  if (currentValue.includes('.')) {
+  }
+  else {
+    currentValue += '.'
  currentDisplay.textContent = currentValue
+  }
+ 
 }
