@@ -34,57 +34,59 @@ function divide (...args) {
   return roundToTwo(total) 
 }
 
-let num1 = null;
-let operator = null;
-let num2 = null;
+let previousValue = '';
+let operator = '';
+let currentValue = '';
 
 
-function operate (num1, operator, num2) {
+function operate (currentValue, operator, previousValue) {
   if (operator === '+') {
-    return add(num1, num2)
+    return add(currentValue, previousValue)
   }
   if (operator === '-') {
-    return subtract(num1, num2)
+    return subtract(currentValue, previousValue)
   }
   if (operator === '*') {
-    return multiply(num1, num2)
+    return multiply(currentValue, previousValue)
   }
   if (operator === '/') {
-    return divide(num1, num2)
+    return divide(currentValue, previousValue)
   }
 }
 
-const display = document.querySelector('.display');
+const currentDisplay = document.querySelector('.currentDisplay');
+const previousDisplay = document.querySelector('.previousDisplay')
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
 const clear = document.querySelector('.clear');
 const del = document.querySelector('.delete');
 const equal = document.querySelector('.equal')
 
-function populateDisplay (event) {
-  const button = event.target;
-  const value = button.textContent;
-  if ( value.length < 7) {
-    display.textContent += value;
-  }
-}
-
-function operatorDisplay(event) {
-  const button = event.target;
-  const value = button.textContent;
-  if ( value.length <1) {
-    display.textContent += value;
-  }
-
-}
-
-
-operators.forEach(operator => {
-  operator.addEventListener('click', operatorDisplay)
-   });
-
 numbers.forEach(number => {
-  number.addEventListener('click', populateDisplay); 
+  number.addEventListener('click', function (e) {
+    handleNumber(e.target.textContent);
+    currentDisplay.textContent = currentValue;
+  }); 
 })
 
-// You’ll need to store the first number that is input into the calculator when a user presses an operator
+function handleNumber(num) {
+  if (currentValue.length < 5) {
+    currentValue += num;
+  }
+}
+
+operators.forEach(oper => {
+  oper.addEventListener('click', function (e) {
+    handleOperator(e.target.textContent);
+    currentDisplay.textContent = currentValue;
+    previousDisplay.textContent = previousValue + ' ' + operator;
+    
+  })
+   });
+
+function handleOperator(op) {
+  operator = op;
+  previousValue = currentValue;
+  currentValue = ''
+
+}

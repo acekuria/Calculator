@@ -58,15 +58,21 @@ hr {
   border-radius: 10px;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
+  
   
 }
+.previousDisplay {
+  font-size: 1.4em;
+  margin-right: 15px;
+ } 
 
-
-.display {
+.currentDisplay {
  font-size: 2em;
  margin-right: 15px;
+ align-self: flex-end;
 }
+
+
 
 .big-button-container {
   height:6em;
