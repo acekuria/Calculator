@@ -66,12 +66,15 @@ const decimal = document.querySelector('.decimal')
 numbers.forEach(number => {
   number.addEventListener('click', function (e) {
     handleNumber(e.target.textContent);
+    if (previousDisplay.textContent.includes('=')) {
+
+    }
     currentDisplay.textContent = currentValue;
   }); 
 })
 
 function handleNumber(num) {
-  if (currentValue.length < 5) {
+  if (currentValue.length < 8) {
     currentValue += num;
   }
 }
@@ -107,9 +110,14 @@ function cleared() {
 equal.addEventListener('click', equalled)
 
 function equalled () {
-  previousDisplay.textContent += ' ' + currentValue;
-  currentValue = operate(parseFloat(currentValue), operator, parseFloat(previousValue));
-  currentDisplay.textContent = currentValue;
+  if (previousDisplay.textContent.includes('=')) {
+
+  } else {
+    previousDisplay.textContent += ' ' + currentValue + ' ' + '=';
+    currentValue = operate(parseFloat(currentValue), operator, parseFloat(previousValue));
+    currentDisplay.textContent = currentValue; 
+  }
+  
 }
 
 function deleted () {
