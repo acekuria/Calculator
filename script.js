@@ -85,10 +85,13 @@ operators.forEach(oper => {
    });
 
 function handleOperator(op) {
-  operator = op;
-  previousValue = currentValue;
-  currentValue = ''
-
+  if (!previousDisplay.textContent.includes(op)) {
+    if (!currentValue !== '') {
+      operator = op;
+      previousValue = currentValue;
+      currentValue = '';
+    }
+  }
 }
 
 clear.addEventListener('click', cleared)
