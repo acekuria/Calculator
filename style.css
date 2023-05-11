@@ -58,7 +58,7 @@ hr {
   border-radius: 10px;
   display: flex;
   justify-content: flex-end;
-  
+  overflow: hidden;
   
 }
 .previousDisplay {

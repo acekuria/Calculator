@@ -74,9 +74,7 @@ numbers.forEach(number => {
 })
 
 function handleNumber(num) {
-  if (currentValue.length < 8) {
     currentValue += num;
-  }
 }
 
 operators.forEach(oper => {
@@ -137,8 +135,60 @@ function decimalised () {
   if (currentValue.includes('.')) {
   }
   else {
-    currentValue += '.'
- currentDisplay.textContent = currentValue
+    currentValue += '.';
+    currentDisplay.textContent = currentValue;
   }
  
 }
+
+window.addEventListener('keydown', function(e) {
+  // Get the key code of the pressed key
+  const key = e.keyCode;
+  console.log(key)
+  console.log(String.fromCharCode(key))
+  // Handle numeric keys and decimal point
+  if (key >= 48 && key <= 57) {
+     let num = String.fromCharCode(key);
+      handleNumber(num);
+      currentDisplay.textContent = currentValue;
+    }
+  
+  
+  // Handle operator keys
+  if ((key === 187) || key === 189 || key === 88 || key === 191) {
+    // Get the operator from the key code
+    let operator = '';
+    switch(key) {
+      case 187:
+        operator = '+';
+        break;
+      case 189:
+        operator = '-';
+        break;
+      case 88:
+        operator = 'x';
+        break;
+      case 191:
+        operator = '÷';
+        break;
+    }
+    handleOperator(operator);
+    currentDisplay.textContent = currentValue;
+    previousDisplay.textContent = previousValue + ' ' + operator;
+  }
+  
+  // Handle equal key
+  if (key === 13) {
+    equalled();
+  }
+
+  // Handle delete key
+  if (key === 8) {
+    deleted();
+  }
+  
+  // Handle decimal key
+  if (key === 190 || key === 110) {
+    decimalised();
+  }
+});
